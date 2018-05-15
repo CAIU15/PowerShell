@@ -11,6 +11,7 @@ Set-ExecutionPolicy Unrestricted
 <# Functions are defined in this section #>
 # Loops function 'findUser'
 function findUserAgain {
+    findUser
     Write-Host "---------------------------------------------"
     Write-Host "Choices:"
     Write-Host "Y = perform another lookup."
@@ -28,6 +29,7 @@ function findUser {
     try {
         $ProxyAddress = Read-Host -Prompt "Input the user's email address"
         Get-Recipient | where {$_.EmailAddresses -match "$ProxyAddress"} | fL Name, RecipientType,emailaddresses
+        Write-Host "End of results!" -ForegroundColor DarkYellow
     }
     catch {
         Write-Host "Try again"
@@ -82,7 +84,6 @@ Start-Sleep -Milliseconds 300
 logIn
 Write-Host "Login Successful" -ForegroundColor Green
 findUser
-Write-Host "End of results!" -ForegroundColor DarkYellow
 findUserAgain
 Do {
     findUserAgain
